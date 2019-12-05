@@ -8,6 +8,7 @@ import json
 import random
 import copy
 import pickle
+import os
 
 
 
@@ -503,15 +504,18 @@ def get_metrics(scores):
 def main() -> None:
     NLP = spacy.load("en_core_web_sm", disable=["ner"])
     docs = list()
-    with open("annotated_data/phil_this_1-100,301-400.jsonl", "r", encoding="utf8") as f:
-        lines = f.readlines()
-    for line in lines:
-        json_as_dict = json.loads(line)
-        try:
-            doc = ingest_json_document(json_as_dict, NLP)
-            docs.append(doc)
-        except ValueError:
-            pass
+    path_to_annotated = "annotated_data"
+    for dirpath, dirnames, filenames in os.walk(path_to_annotated):
+        for file in filenames:
+            with open(path_to_annotated+"/"+file, "r", encoding="utf8") as f:
+                lines = f.readlines()
+            for line in lines:
+                json_as_dict = json.loads(line)
+                try:
+                    doc = ingest_json_document(json_as_dict, NLP)
+                    docs.append(doc)
+                except ValueError:
+                    pass
 
     random.shuffle(docs)
     """
@@ -524,11 +528,11 @@ def main() -> None:
     with open('data.pickle', 'rb') as handle:
         docs = pickle.load(handle)
     """
-    gold = docs[:20]
+    gold = docs[:len(docs)//5]
     predicted = copy.deepcopy(gold)
     for doc in predicted:
         doc.ents = []
-    training = docs[20:]
+    training = docs[len(docs)//5:]
     # best configuration features
     features = [BiasFeature(), TokenFeature(), UppercaseFeature(), TitlecaseFeature(),
                 DigitFeature(), WordShapeFeature(), WordVectorFeature(("wordvectors/wiki-news-300d-1M-subword.magnitude"), scaling=2.0),
