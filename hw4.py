@@ -528,6 +528,7 @@ def main() -> None:
     with open('data.pickle', 'rb') as handle:
         docs = pickle.load(handle)
     """
+    corpus_description(docs)
     gold = docs[:len(docs)//5]
     predicted = copy.deepcopy(gold)
     for doc in predicted:
@@ -546,7 +547,18 @@ def main() -> None:
     prf1 = span_prf1_type_map(gold, predicted)
 
     print_results(prf1)
-    print(span_scoring_counts(gold, predicted))
+    scoring = span_scoring_counts(gold, predicted)
+    for k in scoring:
+        print(k)
+        print()
+
+def corpus_description(docs):
+    instances = len(docs)
+    entities = sum([len(doc.ents) for doc in docs])
+    tokens = sum([len(doc) for doc in docs])
+    print("Instances: " + str(instances))
+    print("Entities: " + str(entities))
+    print("Tokens: " + str(tokens))
 
 def print_results(prf1):
     # Always round .5 up, not towards even numbers as is the default
