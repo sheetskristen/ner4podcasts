@@ -9,7 +9,7 @@ import random
 import copy
 import pickle
 import os
-
+from collections import Counter
 
 
 from typing import Sequence, Dict, Optional, List
@@ -544,21 +544,21 @@ def main() -> None:
     crf = CRFsuiteEntityRecognizer(WindowedTokenFeatureExtractor(features,1,),BILOUEncoder())
     crf.train(training, "ap", {"max_iterations":  40}, "tmp.model")
     predicted = [crf(doc) for doc in predicted]
-    prf1 = span_prf1_type_map(gold, predicted)
+    prf1 = span_prf1_type_map(gold, predicted, {"LOCATION":"GPE_LOC", "GPE":"GPE_LOC"})
 
     print_results(prf1)
-    scoring = span_scoring_counts(gold, predicted)
-    for k in scoring:
-        print(k)
-        print()
+    print(span_scoring_counts(gold, predicted))
 
 def corpus_description(docs):
     instances = len(docs)
-    entities = sum([len(doc.ents) for doc in docs])
+    entities = [ent.label_ for doc in docs for ent in doc.ents]
+    entities_total = sum([len(doc.ents) for doc in docs])
     tokens = sum([len(doc) for doc in docs])
     print("Instances: " + str(instances))
-    print("Entities: " + str(entities))
+    print("Entities: " + str(entities_total))
     print("Tokens: " + str(tokens))
+    print(Counter(entities))
+
 
 def print_results(prf1):
     # Always round .5 up, not towards even numbers as is the default
