@@ -9,7 +9,7 @@ import random
 import copy
 import pickle
 import os
-
+from collections import Counter
 
 
 from typing import Sequence, Dict, Optional, List
@@ -327,11 +327,11 @@ class TokenFeature(FeatureExtractor):
 
 class PrefixFeature(FeatureExtractor):
     def extract(self, token: str, current_idx: int, relative_idx: int, tokens: Sequence[str], features: Dict[str, float]):
-        features["tok["+str(relative_idx)+"]="+token[:4]]=1.0
+        features["tok["+str(relative_idx)+"]="+token[:5]]=1.0
 
 class SuffixFeature(FeatureExtractor):
     def extract(self, token: str, current_idx: int, relative_idx: int, tokens: Sequence[str], features: Dict[str, float]):
-        features["tok["+str(relative_idx)+"]="+token[4:]]=1.0
+        features["tok["+str(relative_idx)+"]="+token[-5:]]=1.0
 
 class UppercaseFeature(FeatureExtractor):
     def extract(self, token: str, current_idx: int, relative_idx: int, tokens: Sequence[str], features: Dict[str, float]):
@@ -500,6 +500,14 @@ def get_metrics(scores):
     return ("\t".join(metrics_string))
 
 
+def generate_tsvs(ep_ids, predicted):
+    with open('topic_modeling_tsvs/predicted_ents.tsv', 'w') as f:
+        f.write('entity\ttype\ttopic\n')
+        for ep_id, pred in zip(ep_ids, predicted):
+            ents = pred.ents
+            for ent in ents:
+                f.write(f'{ent}\t{ent.label_}\t{ep_id}\n')
+
 
 def main() -> None:
     NLP = spacy.load("en_core_web_sm", disable=["ner"])
@@ -513,12 +521,13 @@ def main() -> None:
                 json_as_dict = json.loads(line)
                 try:
                     doc = ingest_json_document(json_as_dict, NLP)
-                    docs.append(doc)
+                    docs.append((doc, json_as_dict['ep_id']))
                 except ValueError:
                     pass
 
     random.shuffle(docs)
     """
+
     I chose to pickle in order to: 
     - avoid doing everything from the begining every time I run the code
     - make sure that the experiements are run on the same test/train split (so that metrics are comparable)
@@ -528,6 +537,9 @@ def main() -> None:
     with open('data.pickle', 'rb') as handle:
         docs = pickle.load(handle)
     """
+
+    docs, ep_ids = zip(*docs)
+
     corpus_description(docs)
     gold = docs[:len(docs)//5]
     predicted = copy.deepcopy(gold)
@@ -535,30 +547,38 @@ def main() -> None:
         doc.ents = []
     training = docs[len(docs)//5:]
     # best configuration features
-    features = [BiasFeature(), TokenFeature(), UppercaseFeature(), TitlecaseFeature(),
-                DigitFeature(), WordShapeFeature(), WordVectorFeature(("wordvectors/wiki-news-300d-1M-subword.magnitude"), scaling=2.0),
-                BrownClusterFeature("wordvectors/rcv1.64M-c10240-p1.paths", use_full_paths=True), SuffixFeature(), PrefixFeature()]
 
-    #PunctuationFeature(),
+    features = [BiasFeature(), UppercaseFeature(),TitlecaseFeature(),
+                DigitFeature(),
+                WordVectorFeature(("wordvectors/wiki-news-300d-1M-subword.magnitude"), scaling=2.0),
+                BrownClusterFeature("wordvectors/rcv1.64M-c10240-p1.paths", use_full_paths=True),
+                SuffixFeature(), PrefixFeature()]
+
+
 
     crf = CRFsuiteEntityRecognizer(WindowedTokenFeatureExtractor(features,1,),BILOUEncoder())
     crf.train(training, "ap", {"max_iterations":  40}, "tmp.model")
+
     predicted = [crf(doc) for doc in predicted]
-    prf1 = span_prf1_type_map(gold, predicted)
+
+    # This generates TSVs for topic modeling.
+    generate_tsvs(ep_ids, predicted)
+
+    prf1 = span_prf1_type_map(gold, predicted, {"LOCATION":"GPE_LOC", "GPE":"GPE_LOC"})
 
     print_results(prf1)
-    scoring = span_scoring_counts(gold, predicted)
-    for k in scoring:
-        print(k)
-        print()
+    print(span_scoring_counts(gold, predicted))
 
 def corpus_description(docs):
     instances = len(docs)
-    entities = sum([len(doc.ents) for doc in docs])
+    entities = [ent.label_ for doc in docs for ent in doc.ents]
+    entities_total = sum([len(doc.ents) for doc in docs])
     tokens = sum([len(doc) for doc in docs])
     print("Instances: " + str(instances))
-    print("Entities: " + str(entities))
+    print("Entities: " + str(entities_total))
     print("Tokens: " + str(tokens))
+    print(Counter(entities))
+
 
 def print_results(prf1):
     # Always round .5 up, not towards even numbers as is the default
