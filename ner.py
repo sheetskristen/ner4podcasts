@@ -327,11 +327,11 @@ class TokenFeature(FeatureExtractor):
 
 class PrefixFeature(FeatureExtractor):
     def extract(self, token: str, current_idx: int, relative_idx: int, tokens: Sequence[str], features: Dict[str, float]):
-        features["tok["+str(relative_idx)+"]="+token[:4]]=1.0
+        features["tok["+str(relative_idx)+"]="+token[:5]]=1.0
 
 class SuffixFeature(FeatureExtractor):
     def extract(self, token: str, current_idx: int, relative_idx: int, tokens: Sequence[str], features: Dict[str, float]):
-        features["tok["+str(relative_idx)+"]="+token[4:]]=1.0
+        features["tok["+str(relative_idx)+"]="+token[-5:]]=1.0
 
 class UppercaseFeature(FeatureExtractor):
     def extract(self, token: str, current_idx: int, relative_idx: int, tokens: Sequence[str], features: Dict[str, float]):
@@ -527,6 +527,7 @@ def main() -> None:
 
     random.shuffle(docs)
     """
+
     I chose to pickle in order to: 
     - avoid doing everything from the begining every time I run the code
     - make sure that the experiements are run on the same test/train split (so that metrics are comparable)
@@ -546,11 +547,14 @@ def main() -> None:
         doc.ents = []
     training = docs[len(docs)//5:]
     # best configuration features
-    features = [BiasFeature(), TokenFeature(), UppercaseFeature(), TitlecaseFeature(),
-                DigitFeature(), WordShapeFeature(), WordVectorFeature(("wordvectors/wiki-news-300d-1M-subword.magnitude"), scaling=2.0),
-                BrownClusterFeature("wordvectors/rcv1.64M-c10240-p1.paths", use_full_paths=True), SuffixFeature(), PrefixFeature()]
 
-    #PunctuationFeature(),
+    features = [BiasFeature(), UppercaseFeature(),TitlecaseFeature(),
+                DigitFeature(),
+                WordVectorFeature(("wordvectors/wiki-news-300d-1M-subword.magnitude"), scaling=2.0),
+                BrownClusterFeature("wordvectors/rcv1.64M-c10240-p1.paths", use_full_paths=True),
+                SuffixFeature(), PrefixFeature()]
+
+
 
     crf = CRFsuiteEntityRecognizer(WindowedTokenFeatureExtractor(features,1,),BILOUEncoder())
     crf.train(training, "ap", {"max_iterations":  40}, "tmp.model")
@@ -560,7 +564,7 @@ def main() -> None:
     # This generates TSVs for topic modeling.
     generate_tsvs(ep_ids, predicted)
 
-    prf1 = span_prf1_type_map(gold, predicted, , {"LOCATION":"GPE_LOC", "GPE":"GPE_LOC"})
+    prf1 = span_prf1_type_map(gold, predicted, {"LOCATION":"GPE_LOC", "GPE":"GPE_LOC"})
 
     print_results(prf1)
     print(span_scoring_counts(gold, predicted))
