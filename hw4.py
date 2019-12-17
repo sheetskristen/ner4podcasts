@@ -500,6 +500,14 @@ def get_metrics(scores):
     return ("\t".join(metrics_string))
 
 
+def generate_tsvs(ep_ids, predicted):
+    with open('topic_modeling_tsvs/predicted_ents.tsv', 'w') as f:
+        f.write('entity\ttype\ttopic\n')
+        for ep_id, pred in zip(ep_ids, predicted):
+            ents = pred.ents
+            for ent in ents:
+                f.write(f'{ent}\t{ent.label_}\t{ep_id}\n')
+
 
 def main() -> None:
     NLP = spacy.load("en_core_web_sm", disable=["ner"])
@@ -513,7 +521,7 @@ def main() -> None:
                 json_as_dict = json.loads(line)
                 try:
                     doc = ingest_json_document(json_as_dict, NLP)
-                    docs.append(doc)
+                    docs.append((doc, json_as_dict['ep_id']))
                 except ValueError:
                     pass
 
@@ -528,6 +536,9 @@ def main() -> None:
     with open('data.pickle', 'rb') as handle:
         docs = pickle.load(handle)
     """
+
+    docs, ep_ids = zip(*docs)
+
     corpus_description(docs)
     gold = docs[:len(docs)//5]
     predicted = copy.deepcopy(gold)
@@ -543,7 +554,12 @@ def main() -> None:
 
     crf = CRFsuiteEntityRecognizer(WindowedTokenFeatureExtractor(features,1,),BILOUEncoder())
     crf.train(training, "ap", {"max_iterations":  40}, "tmp.model")
+
     predicted = [crf(doc) for doc in predicted]
+
+    # This generates TSVs for topic modeling.
+    generate_tsvs(ep_ids, predicted)
+
     prf1 = span_prf1_type_map(gold, predicted)
 
     print_results(prf1)
