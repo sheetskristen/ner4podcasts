@@ -1,0 +1,208 @@
+entity	type	topic
+Christmas	EVENT	ukfestivities.txt
+Bill Clinton	PERSON	chapo
+Chad	PERSON	chapo
+Deedee Myers	PERSON	chapo
+White House	GPE	chapo
+Plotinus	PERSON	philthis
+bodily existence	CONCEPT	philthis
+true existence	CONCEPT	philthis
+-thirds	PERCENT	firstdraft.txt
+two weeks	DATE	firstdraft.txt
+Stoicism	CONCEPT	philthis
+John Locke	PERSON	philthis
+800 BC	TIME	philthis
+Greek	LANGUAGE	philthis
+Christianity	CONCEPT	philthis
+Fall of the Roman Empire	CONCEPT	philthis
+Church	GPE	philthis
+Instagram	PRODUCT	firstdraft.txt
+Chad	PERSON	chapo
+Clinton	PERSON	chapo
+White House	GPE	chapo
+White House	GPE	chapo
+Brandys	PERSON	firstdraft.txt
+millions	CARDINAL	moveyourdna.txt
+millions	CARDINAL	moveyourdna.txt
+thousands	CARDINAL	moveyourdna.txt
+knowledge	CONCEPT	moveyourdna.txt
+Kevin	PERSON	kevin.txt
+New York Times	ORGANIZATION	firstdraft.txt
+Western	WORK OF ART	philthis
+Europe	GPE	philthis
+English Bulldog	PERSON	philthis
+modern America	DATE	philthis
+-gatherer	CONCEPT	philthis
+Pyrrhic victoryIm	EVENT	philthis
+colloquialism	LANGUAGE	philthis
+United States	GPE	philthis
+labor	CONCEPT	moveyourdna.txt
+Alexander the Great	PERSON	philthis
+Far from the Tree	WORK OF ART	firstdraft.txt
+14	QUANTITY	moveyourdna.txt
+-16	DATE	moveyourdna.txt
+First Draft	ORGANIZATION	firstdraft.txt
+Athensafter	GPE	philthis
+thousands	CARDINAL	moveyourdna.txt
+Erasmus	PERSON	philthis
+1 million	QUANTITY	ukfestivities.txt
+sophists	CONCEPT	philthis
+Move Your DNA	WORK OF ART	moveyourdna.txt
+Venn Design	PERSON	moveyourdna.txt
+Unshoes	PERSON	moveyourdna.txt
+Softstar Shoes	GPE	moveyourdna.txt
+ten years	DATE	firstdraft.txt
+love	CONCEPT	philthis
+strife	CONCEPT	philthis
+CPS	CONCEPT	kevin.txt
+Maya	PERSON	firstdraft.txt
+Stalingrad	PERSON	moveyourdna.txt
+Hamburg Germany	PERSON	moveyourdna.txt
+New York City	WORK OF ART	moveyourdna.txt
+Detroit	GPE	moveyourdna.txt
+Stephen West	PERSON	philthis
+Venn Design	PERSON	moveyourdna.txt
+Unshoes	PERSON	moveyourdna.txt
+Yoga Girl Daily	ORGANIZATION	yogagirl.txt
+18	QUANTITY	moveyourdna.txt
+Hitler	PERSON	philthis
+WW2	CONCEPT	philthis
+Maurene Goo	PERSON	firstdraft.txt
+First Draft	ORGANIZATION	firstdraft.txt
+skepticism	CONCEPT	philthis
+Greek	LANGUAGE	philthis
+Maya	PERSON	firstdraft.txt
+middle of 2015	DATE	firstdraft.txt
+wild food foraging	CONCEPT	moveyourdna.txt
+God	PERSON	philthis
+Peters	PERSON	philthis
+ergonomics	CONCEPT	moveyourdna.txt
+16	CARDINAL	kevin.txt
+16	CARDINAL	kevin.txt
+Hobbes	PERSON	philthis
+laws	CONCEPT	philthis
+God	PERSON	philthis
+30	CARDINAL	moveyourdna.txt
+40	CARDINAL	moveyourdna.txt
+Kari Russell	PERSON	firstdraft.txt
+Felicity	PERSON	firstdraft.txt
+Maya	PERSON	firstdraft.txt
+Claire	PERSON	firstdraft.txt
+Plato	PERSON	philthis
+27	CARDINAL	philthis
+treatisespractically 27	DATE	philthis
+Wembley Stadium	PERSON	ukfestivities.txt
+Grace	PERSON	firstdraft.txt
+Far From the Tree	WORK OF ART	firstdraft.txt
+Young Peoples Literature	PERSON	firstdraft.txt
+2017	DATE	firstdraft.txt
+Plotinus	PERSON	philthis
+Charlie	PERSON	philthis
+pig	PRODUCT	philthis
+1600s	DATE	philthis
+Thomas Hobbes	PERSON	philthis
+Plutarch	PERSON	philthis
+Joaquin	PERSON	firstdraft.txt
+Far from the Tree	WORK OF ART	firstdraft.txt
+Pyrrho	PERSON	philthis
+Cancun	GPE	kevin.txt
+Kevin	PERSON	kevin.txt
+San Diego	GPE	kevin.txt
+Spanish	LANGUAGE	kevin.txt
+foraging	CONCEPT	moveyourdna.txt
+UK	GPE	ukfestivities.txt
+3	CARDINAL	moveyourdna.txt
+Maya	PERSON	firstdraft.txt
+Lauren	PERSON	firstdraft.txt
+UK	GPE	ukfestivities.txt
+Maya	PERSON	firstdraft.txt
+Spanish	LANGUAGE	kevin.txt
+Joaquin	PERSON	firstdraft.txt
+Whole Body Barefoot	WORK OF ART	moveyourdna.txt
+Sam	PERSON	moveyourdna.txt
+ten	CARDINAL	philthis
+ten	CARDINAL	philthis
+November	DATE	ukfestivities.txt
+forage	CONCEPT	moveyourdna.txt
+Kevin	PERSON	kevin.txt
+Mexico--	GPE	kevin.txt
+Plato	PERSON	philthis
+Far from the Tree	WORK OF ART	firstdraft.txt
+Maya	PERSON	firstdraft.txt
+Mexico	GPE	kevin.txt
+Emmy & Oliver	WORK OF ART	firstdraft.txt
+Chinese	PERSON	chapo
+foraging	CONCEPT	moveyourdna.txt
+tranquility	CONCEPT	philthis
+San Diego	GPE	kevin.txt
+Far from the Tree	WORK OF ART	firstdraft.txt
+three	QUANTITY	firstdraft.txt
+four thousand	CARDINAL	firstdraft.txt
+the Renaissance	DATE	philthis
+Middle Ages	DATE	philthis
+the Renaissance	DATE	philthis
+Middle Ages	DATE	philthis
+Mexico	GPE	firstdraft.txt
+Kathy's	PERSON	kevin.txt
+Cove Drive	FACILITY	kevin.txt
+Saturday	DATE	firstdraft.txt
+Hellenistic Age	DATE	philthis
+two	QUANTITY	firstdraft.txt
+Latino	GPE	firstdraft.txt
+Mexican	NORP	firstdraft.txt
+Hispanic	NORP	firstdraft.txt
+21	CARDINAL	kevin.txt
+Jeep	PRODUCT	kevin.txt
+Mexico	GPE	kevin.txt
+Aztecs	NORP	kevin.txt
+Mayan	PERSON	kevin.txt
+labor	CONCEPT	moveyourdna.txt
+Emmy & Oliver	WORK OF ART	firstdraft.txt
+two	CARDINAL	moveyourdna.txt
+Grace	PERSON	firstdraft.txt
+Maya	PERSON	firstdraft.txt
+22	CARDINAL	kevin.txt
+Thomas Hobbes	PERSON	philthis
+Unshoes	PERSON	moveyourdna.txt
+Venn Design	PERSON	moveyourdna.txt
+Rome	GPE	philthis
+Kevin	PERSON	kevin.txt
+Michel de Montaigne	PERSON	philthis
+Maimonides	PERSON	philthis
+ten thousand	CARDINAL	philthis
+labor	CONCEPT	moveyourdna.txt
+Mexico	GPE	kevin.txt
+Seneca	PERSON	philthis
+Epictetus	PERSON	philthis
+Marcus Aurelius	PERSON	philthis
+Plutarch	PERSON	philthis
+Athenian	GPE	philthis
+wisdom	CONCEPT	philthis
+Diwali	EVENT	ukfestivities.txt
+Deepavali	NORP	ukfestivities.txt
+Festival of Lights	EVENT	ukfestivities.txt
+Hindu	CONCEPT	ukfestivities.txt
+Sikh	PERSON	ukfestivities.txt
+Jain	NORP	ukfestivities.txt
+Stephen West	PERSON	philthis
+Haute cuisine	CONCEPT	moveyourdna.txt
+labor	CONCEPT	moveyourdna.txt
+Marcus Aurelius	PERSON	philthis
+emperor of Rome	PERSON	philthis
+emperor of Rome	PERSON	philthis
+Stoicism	CONCEPT	philthis
+Seneca	PERSON	philthis
+Epictetus	PERSON	philthis
+stoicism	CONCEPT	philthis
+Philosophy	PERSON	philthis
+Hellenistic Stoicism	DATE	philthis
+Roman Stoics	PERSON	philthis
+Seneca	PERSON	philthis
+Epictetus	PERSON	philthis
+Marcus Aurelius	PERSON	philthis
+Sophists	CONCEPT	philthis
+Sam	PERSON	moveyourdna.txt
+Billy Joe	PERSON	moveyourdna.txt
+Wild Food Cookbook	WORK OF ART	moveyourdna.txt
+Boxing Day	EVENT	ukfestivities.txt
+Jerry Seinfeld	PERSON	philthis
