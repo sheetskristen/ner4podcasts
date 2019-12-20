@@ -1,4 +1,5 @@
 # Named Entity Recognition for Podcasts
+## Elena ́Alvarez Mellado, Julian Fernandez, Kristen Sheets, Linxuan Yang
 
 Hello!
 
